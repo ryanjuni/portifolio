@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pt-Br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ryan Junio</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=Syne:wght@700;800&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  
+  <link rel="stylesheet" href="./styles.css">
+  <link rel="icon" href="./Logo/logo.svg">
+</head>
+
+<body>
+  <div id="webGLApp"></div>
+
+  <div class="container">
+    
+    <header class="left-side">
+      <div class="header-info">
+        <h1 class="heading">Ryan Junio</h1>
+        <h2 class="sub-heading">Cientista da Computação</h2>
+        <p class="tagline">Transformando ideias em projetos de alta performance.</p>
+
+        <nav class="nav-menu">
+          <a href="#sobre" class="nav-link active">
+            <span class="nav-line"></span> SOBRE
+          </a>     
+          <a href="#experiencia" class="nav-link">
+            <span class="nav-line"></span> EXPERIÊNCIA
+          </a>
+          <a href="#projetos" class="nav-link">
+            <span class="nav-line"></span> PROJETOS
+          </a>
+        </nav>
+      </div>
+
+      <footer class="social-links">
+        <a href="https://github.com/ryanjuni" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i></a>
+        <a href="https://www.linkedin.com/in/ryanjunioo/" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-linkedin"></i></a>
+        <a href="https://www.instagram.com/ryanjunioo/" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-instagram"></i></a>
+        <a href="https://codepen.io/Ryan-Junio" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-codepen"></i></a>
+      </footer>
+    </header>
+
+    <main class="right-side">
+      <section id="sobre" class="section">
+        <p class="efeito">
+          Sou Estudante de ciências da computação, apaixonado por tecnologia e inovação. Busco transformar ideias em soluções práticas, explorando áreas como desenvolvimento , inteligência artificial e ciências de dados etc... , Estou sempre em busca de novos aprendizados e desafios para evoluir minhas habilidades e contribuir com projetos impactantes
+        . Fora da faculdade, geralmente você pode me encontrar em treinos de musculação, assistindo à série, passando tempo com meus dois gatos, ou estudando. <br/>  
+        </p>
+      </section>
+      
+      <section id="experiencia" class="section">
+        <h3>Experiência</h3>
+        <p>Atualmente, tenho a oportunidade de aplicar meus conhecimentos em projetos reais e colaborar com profissionais experientes. Estou envolvido em atividades que abrangem desde o desenvolvimento de software até a análise de dados.</p>
+      </section>
+
+      <section id="projetos" class="section">
+        <h3>Projeto Selecionado</h3>
+        <p>para mais projetos, visite meu GitHub</p>
+        <br/>
+
+        <div class="project-video">
+          <iframe 
+             src="https://github.com/user-attachments/assets/35fb139d-0ff6-46a0-affb-0226a49be1a0" 
+             frameborder="0" 
+             allow="autoplay; encrypted-media" 
+             allowfullscreen>
+           </iframe>
+        </div>
+      </section>
+       
+    
+    </main>
+
+  </div>
+
+  <div class="custom-cursor" id="customCursor"></div>
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://unpkg.com/lenis@1.1.20/dist/lenis.min.js"></script>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. Inicializa o Lenis (Motor de Scroll)
+      const lenis = new Lenis();
+
+      function raf(time) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+      }
+      requestAnimationFrame(raf);
+
+      // 2. Clique no Menu (Usa o Lenis para rolar, sem travar)
+      document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          const targetId = this.getAttribute('href');
+          const targetElement = document.querySelector(targetId);
+          
+          if (targetElement) {
+            // O segredo está aqui: o Lenis assume o controle do scroll
+            lenis.scrollTo(targetElement, {
+              offset: -50,
+              duration: 1.5
+            });
+          }
+        });
+      });
+
+      // 3. Scroll Spy (Muda a classe active conforme você rola a direita)
+      lenis.on('scroll', () => {
+        let current = "";
+        const sections = document.querySelectorAll('section[id]');
+        
+        sections.forEach(section => {
+          const sectionTop = section.offsetTop;
+          if (window.scrollY >= sectionTop - 150) {
+            current = section.getAttribute('id');
+          }
+        });
+
+        document.querySelectorAll('.nav-link').forEach(link => {
+          link.classList.remove('active');
+          if (link.getAttribute('href').includes(current)) {
+            link.classList.add('active');
+          }
+        });
+      });
+    });
+  </script>
+
+  <script src="./home.js"></script>
+</body>
+</html>
