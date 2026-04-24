@@ -16,13 +16,16 @@
 </head>
 
 <body>
-  <div id="webGLApp"></div>
+  <canvas id="nokey"></canvas>
 
   <div class="container">
     
     <header class="left-side">
       <div class="header-info">
-        <h1 class="heading">Ryan Junio</h1>
+        <h1 class="heading">
+          <span class="first-name">Ryan</span>
+          <span class="last-name">Junio</span>
+        </h1>
         <h2 class="sub-heading">Cientista da Computação</h2>
         <p class="tagline">Transformando ideias em projetos de alta performance.</p>
 
@@ -50,8 +53,7 @@
     <main class="right-side">
       <section id="sobre" class="section">
         <p class="efeito">
-          Sou Estudante de ciências da computação, apaixonado por tecnologia e inovação. Busco transformar ideias em soluções práticas, explorando áreas como desenvolvimento , inteligência artificial e ciências de dados etc... , Estou sempre em busca de novos aprendizados e desafios para evoluir minhas habilidades e contribuir com projetos impactantes
-        . Fora da faculdade, geralmente você pode me encontrar em treinos de musculação, assistindo à série, passando tempo com meus dois gatos, ou estudando. <br/>  
+          Sou Estudante de ciências da computação, apaixonado por tecnologia e inovação. Busco transformar ideias em soluções práticas, explorando áreas como desenvolvimento , inteligência artificial e ciências de dados etc... , Estou sempre em busca de novos aprendizados e desafios para evoluir minhas habilidades e contribuir com projetos impactantes . Fora da faculdade, geralmente você pode me encontrar em treinos de musculação, assistindo à série, passando tempo com meus dois gatos, ou estudando. <br/>  
         </p>
       </section>
       
@@ -74,67 +76,13 @@
            </iframe>
         </div>
       </section>
-       
-    
     </main>
 
   </div>
 
   <div class="custom-cursor" id="customCursor"></div>
   
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script src="https://unpkg.com/lenis@1.1.20/dist/lenis.min.js"></script>
-  
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      // 1. Inicializa o Lenis (Motor de Scroll)
-      const lenis = new Lenis();
-
-      function raf(time) {
-        lenis.raf(time);
-        requestAnimationFrame(raf);
-      }
-      requestAnimationFrame(raf);
-
-      // 2. Clique no Menu (Usa o Lenis para rolar, sem travar)
-      document.querySelectorAll('.nav-link').forEach(link => {
-        link.addEventListener('click', function(e) {
-          e.preventDefault();
-          const targetId = this.getAttribute('href');
-          const targetElement = document.querySelector(targetId);
-          
-          if (targetElement) {
-            // O segredo está aqui: o Lenis assume o controle do scroll
-            lenis.scrollTo(targetElement, {
-              offset: -50,
-              duration: 1.5
-            });
-          }
-        });
-      });
-
-      // 3. Scroll Spy (Muda a classe active conforme você rola a direita)
-      lenis.on('scroll', () => {
-        let current = "";
-        const sections = document.querySelectorAll('section[id]');
-        
-        sections.forEach(section => {
-          const sectionTop = section.offsetTop;
-          if (window.scrollY >= sectionTop - 150) {
-            current = section.getAttribute('id');
-          }
-        });
-
-        document.querySelectorAll('.nav-link').forEach(link => {
-          link.classList.remove('active');
-          if (link.getAttribute('href').includes(current)) {
-            link.classList.add('active');
-          }
-        });
-      });
-    });
-  </script>
-
   <script src="./home.js"></script>
 </body>
 </html>
